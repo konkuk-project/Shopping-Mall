@@ -1,0 +1,97 @@
+.nav {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
+    border-bottom : 1px solid #000;
+}
+
+        .nav > * {
+            margin-right: 10px;
+        }
+
+
+.item-list {
+    width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+        .item-list .item {
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor  : pointer;
+        }
+
+                .item-list .item .thumbnail {
+                    width: 260px;
+                    height: 260px;
+                    margin-bottom: 5px;
+                    background-color: red;
+                }
+
+                .item-list .item .name {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                }
+
+                .item-list .item .price {
+                    font-size: 14px;
+                }
+
+        .item-list .cart-item {
+            width: 300px;
+            padding: 20px;
+            box-sizing: border-box;
+            cursor  : pointer;
+            display: flex;
+        }
+
+                .item-list .cart-item .thumbnail {
+                    width: 100px;
+                    height: 100px;
+                    margin-right: 10px;
+                    background-color: red;
+                }
+
+                .item-list .cart-item .info {
+                    width: 190px;
+                    font: 14px;
+                }
+
+        .total-price {
+            color : gray;
+            border-top : 1px solid gray;
+            box-sizing : border-box;
+        }
+
+        .item-list .detail-item {
+            width: 500px;
+            padding: 20px;
+            box-sizing: border-box;
+            font: 14px;
+        }
+
+                .detail-item .thumbnail {
+                    width: 460px;
+                    height: 460px;
+                    background-color : cornflowerblue;
+                    margin-bottom: 5px;
+                }
+
+                .detail-item button {
+                    width: 150px;
+                    height: 30px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border : 1px solid grey;
+                    color : #000;
+                    margin-top: 10px;
+                }
+
