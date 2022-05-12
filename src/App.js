@@ -1,61 +1,62 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "./components/Nav";
 import Cart from "./pages/Cart";
 import Detail from "./pages/ItemDetailView";
 import Main from "./pages/Main";
-import { Routes, Route } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
-
-let itemInfos = [
-  {
-    id: 1,
-    name: "item1",
-    price: 1000,
-    cart_num: 0,
-  },
-  {
-    id: 2,
-    name: "item2",
-    price: 2000,
-    cart_num: 0,
-  },
-  {
-    id: 3,
-    name: "item3",
-    price: 3000,
-    cart_num: 0,
-  },
-  {
-    id: 4,
-    name: "item4",
-    price: 4000,
-    cart_num: 0,
-  },
-  {
-    id: 5,
-    name: "item5",
-    price: 5000,
-    cart_num: 0,
-  },
-];
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Container from "./components/Container";
+import { itemInfos } from "./entities/items/MOCK_DATA";
 
 function App() {
-  const [data, setData] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
+
+  const handleAddToCart = (currentItem) => {
+    setCartItems((prev) => {
+      const next = [...prev];
+
+      if (prev.some((comp) => comp.id == currentItem.id)) {
+        let idx = next.findIndex((item) => item.id === currentItem.id);
+        next[idx] = {
+          ...next[idx],
+          quantity: next[idx].quantity + 1,
+        };
+      } else {
+        next.push({
+          ...currentItem,
+          quantity: 1,
+        });
+      }
+
+      localStorage.cartItems = JSON.stringify(next);
+
+      return next;
+    });
+
+    navigate("/cart");
+  };
+
+  useEffect(() => {
+    if (localStorage.cartItems) {
+      setCartItems(JSON.parse(localStorage.cartItems));
+    }
+  }, []);
 
   return (
     <>
-      <Nav data={data} />
-      <Box p="20px">
+      <Nav cartCount={cartItems.length} />
+      <Container>
         <Routes>
           <Route path="/" element={<Main itemInfos={itemInfos} />} />
-          <Route path="detail" element={<Detail />} />
           <Route
-            path="cart"
-            element={<Cart itemInfos={itemInfos} setData={setData} />}
+            path="detail/:id"
+            element={<Detail onAddToCart={handleAddToCart} />}
           />
+          <Route path="cart" element={<Cart data={cartItems} />} />
+          <Route path="*" element={<>not found 404</>} />
         </Routes>
-      </Box>
+      </Container>
     </>
   );
 }

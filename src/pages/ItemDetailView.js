@@ -1,22 +1,27 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { Box } from "@chakra-ui/react";
+import { itemInfos } from "../entities/items/MOCK_DATA";
 
-function Detail() {
-  const location = useLocation();
+function Detail({ onAddToCart }) {
+  const { id } = useParams();
+  const item = itemInfos.find((info) => info.id == id);
+
+  const onClick = () => onAddToCart(item);
+
   return (
     <div className="detail-item">
-      <div className="thumbnail"></div>
-      <div className="name">{location.state.name}</div>
-      <div className="price">{location.state.price}</div>
-      <Link
-        to={`../cart`}
-        state={{
-          id: location.state.id,
-          cart_num: location.state.cart_num + 1,
-        }}
-      >
-        <button>장바구니 담기</button>
-      </Link>
+      {item ? (
+        <>
+          <Box bg="tomato" w="300px" h="300px"></Box>
+          <div className="name">{item.name}</div>
+          <div className="price">{item.price}</div>
+          <button onClick={onClick}>장바구니 담기</button>
+          {/* </Link> */}
+        </>
+      ) : (
+        <p>상품을 찾을 수 없습니다.</p>
+      )}
     </div>
   );
 }
