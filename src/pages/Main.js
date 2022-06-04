@@ -16,7 +16,6 @@ function Main() {
     const fetchMore = async () => {
       setLoading(true);
 
-      // 1. mock data test
       const itemList = await dummyFetcher(
         (page) => itemInfos.slice(page * 20, (page + 1) * 20),
         page
