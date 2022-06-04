@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "@chakra-ui/react";
-import dummyFetcher from "../utils/dummyFetcher";
 
 import Item from "../components/Item";
 import { Grid } from "@chakra-ui/react";
 import { FetchMore } from "../components/FetchMore";
-import { itemInfos } from "../entities/items/MOCK_DATA";
 
 function Main() {
   const [page, setPage] = useState(0);
@@ -16,12 +14,19 @@ function Main() {
     const fetchMore = async () => {
       setLoading(true);
 
-      const itemList = await dummyFetcher(
-        (page) => itemInfos.slice(page * 20, (page + 1) * 20),
-        page
-      );
+      // const itemList = await dummyFetcher(
+      //   (page) => itemInfos.slice(page * 20, (page + 1) * 20),
+      //   page
+      // );
+      // 1. fetch
+      fetch("https://jsonplaceholder.typicode.com/photos?_start=0&_limit=20")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setList((prev) => [...prev, ...data]);
+        });
 
-      setList((prev) => [...prev, ...itemList]);
+      // 2. axios
 
       setLoading(false);
     };
