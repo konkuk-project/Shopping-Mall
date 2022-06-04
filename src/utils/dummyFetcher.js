@@ -7,7 +7,7 @@ const randomTimer = (func, args) => (resolve) => {
 };
 
 /**
- * fetch 함수기능을 모방한 dummyfetcher 함수
+ * fetch 함수기능을 모방한 dummyfetcher
  * @param {Function} func 내가받고 싶은 데이터를 반환하는 함수
  * @param {Array} args 함수의 매개변수
  * @returns
