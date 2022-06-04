@@ -95,3 +95,31 @@
                     margin-top: 10px;
                 }
  */
+
+.app {
+    position: relative;
+    padding: 10px 10px 0;
+}
+
+.app.loading {
+    height: 100vh;
+}
+
+.app.loading:after {
+    content: "... 로딩중 ...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fetchMore {
+    display: block;
+    text-align: center;
+    line-height: 28px;
+    border: 2px solid red;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

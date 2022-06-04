@@ -1,14 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Box } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 
 // eslint-disable-next-line react/prop-types
 function Item({ info }) {
-  const { id, name, price } = info;
+  const { id, name, price, imageUrl } = info;
   return (
     <Link to={`/detail/${id}`}>
+      <span>{id}</span>
       <div>
-        <Box bg="tomato" w="300px" h="300px" mb="5px"></Box>
+        <Image src={imageUrl} width="100%" />
         <div className="name">{name}</div>
         <div className="price">{price}</div>
       </div>

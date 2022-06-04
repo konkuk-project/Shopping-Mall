@@ -6,7 +6,6 @@ import Detail from "./pages/ItemDetailView";
 import Main from "./pages/Main";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Container from "./components/Container";
-import { itemInfos } from "./entities/items/MOCK_DATA";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -48,7 +47,7 @@ function App() {
       <Nav cartCount={cartItems.length} />
       <Container>
         <Routes>
-          <Route path="/" element={<Main itemInfos={itemInfos} />} />
+          <Route path="/" element={<Main />} />
           <Route
             path="detail/:id"
             element={<Detail onAddToCart={handleAddToCart} />}
