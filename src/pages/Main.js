@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Box, Text } from "@chakra-ui/react";
-import { dummyFetcher } from "../utils/dummyFetcher";
+import { Text } from "@chakra-ui/react";
+import dummyFetcher from "../utils/dummyFetcher";
 
 import Item from "../components/Item";
 import { Grid } from "@chakra-ui/react";

@@ -6,6 +6,8 @@ const randomTimer = (func, args) => (resolve) => {
   }, getRandomSeconds());
 };
 
-export const dummyFetcher = async (func, args) => {
+const dummyFetcher = async (func, args) => {
   return new Promise(randomTimer(func, args));
 };
+
+export default dummyFetcher;
