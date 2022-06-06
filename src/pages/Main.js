@@ -19,7 +19,12 @@ function Main() {
       //   page
       // );
       // 1. fetch
-      fetch("https://jsonplaceholder.typicode.com/photos?_start=0&_limit=20")
+      console.log(page);
+      fetch(
+        `https://jsonplaceholder.typicode.com/photos?_start=${
+          20 * page
+        }&_limit=20`
+      )
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

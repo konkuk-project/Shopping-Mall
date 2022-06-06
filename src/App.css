@@ -99,19 +99,9 @@
 .app {
     position: relative;
     padding: 10px 10px 0;
+    min-height: calc(100vh - 80px);
 }
 
-.app.loading {
-    height: 100vh;
-}
-
-.app.loading:after {
-    content: "... 로딩중 ...";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
 
 .fetchMore {
     display: block;
