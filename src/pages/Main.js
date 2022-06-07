@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "@chakra-ui/react";
+import axios from "axios";
 
 import Item from "../components/Item";
 import { Grid } from "@chakra-ui/react";
@@ -18,20 +19,30 @@ function Main() {
       //   (page) => itemInfos.slice(page * 20, (page + 1) * 20),
       //   page
       // );
-      // 1. fetch
       console.log(page);
-      fetch(
+      // 1. fetch
+      // fetch(
+      //   `https://jsonplaceholder.typicode.com/photos?_start=${
+      //     20 * page
+      //   }&_limit=20`
+      // )
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     setList((prev) => [...prev, ...data]);
+      //   });
+
+      // 2. axios
+      axios(
         `https://jsonplaceholder.typicode.com/photos?_start=${
           20 * page
         }&_limit=20`
       )
-        .then((res) => res.json())
+        .then((res) => res.data)
         .then((data) => {
           console.log(data);
           setList((prev) => [...prev, ...data]);
         });
-
-      // 2. axios
 
       setLoading(false);
     };
