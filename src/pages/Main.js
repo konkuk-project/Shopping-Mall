@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "@chakra-ui/react";
-import axios from "axios";
+import { getPhotos } from "../network";
 
-import Item from "../components/Item";
-import { Grid } from "@chakra-ui/react";
 import { FetchMore } from "../components/FetchMore";
+import ItemList from "../components/item-list";
 
 function Main() {
   const [page, setPage] = useState(0);
@@ -14,12 +13,14 @@ function Main() {
   useEffect(() => {
     const fetchMore = async () => {
       setLoading(true);
+      console.log("loading");
 
+      // 0. dummyfetcher
       // const itemList = await dummyFetcher(
       //   (page) => itemInfos.slice(page * 20, (page + 1) * 20),
       //   page
       // );
-      console.log(page);
+
       // 1. fetch
       // fetch(
       //   `https://jsonplaceholder.typicode.com/photos?_start=${
@@ -33,18 +34,15 @@ function Main() {
       //   });
 
       // 2. axios
-      axios(
-        `https://jsonplaceholder.typicode.com/photos?_start=${
-          20 * page
-        }&_limit=20`
-      )
-        .then((res) => res.data)
-        .then((data) => {
-          console.log(data);
-          setList((prev) => [...prev, ...data]);
-        });
+      try {
+        const data = await getPhotos(`/photos?_start=${20 * page}&_limit=20`);
+        setList((prev) => [...prev, ...data]);
+      } catch (e) {
+        console.debug("main", e);
+      }
 
       setLoading(false);
+      console.log("loading end");
     };
     fetchMore();
   }, [page]);
@@ -52,11 +50,7 @@ function Main() {
   return (
     <>
       <Text as="h3">Best Items</Text>
-      <Grid gridTemplateColumns="repeat(2, 1fr)" gap="10px" className="app">
-        {list.map((info) => (
-          <Item info={info} key={info.id} />
-        ))}
-      </Grid>
+      <ItemList items={list} />
       <FetchMore setPage={setPage} loading={loading} />
     </>
   );

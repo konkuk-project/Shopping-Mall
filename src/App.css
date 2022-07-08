@@ -99,7 +99,7 @@
 .app {
     position: relative;
     padding: 10px 10px 0;
-    min-height: calc(100vh - 80px);
+    /* min-height: calc(100vh - 80px); */
 }
 
 
